@@ -8,7 +8,9 @@ import (
 	"log"
 	"os"
 	"strconv"
+	"strings"
 )
+
 type arrayFlags []int
 func (i *arrayFlags) String() string {
 	return ""
@@ -56,19 +58,15 @@ func run() error {
 	if err != nil {
 		return err
 	}
-	fmt.Println(numbers)
-	fmt.Print(string(t))
+
+	result := wd(string(t), numbers)
+	fmt.Println(result)
 	return nil
 }
 
 func main() {
 	if help {
-		fmt.Print(`For a space-delimited string, outputs the string at the specified location.
-usage: wd -n int
-example: 
-	$ echo "a b c" | wd -n 1
-	a
-`)
+		helpMessage()
 		return
 	}
 	err := run()
@@ -76,4 +74,31 @@ example:
 		log.Print(err.Error())
 		os.Exit(1)
 	}
+}
+
+func helpMessage(){
+	fmt.Print(`For a space-delimited string, outputs the string at the specified location.
+usage: wd -n int
+example: 
+	$ echo "a b c" | wd -n 1
+	a
+`)
+}
+
+func wd(str string, number []int) string {
+	inputArray := strings.Split(strings.Trim(str, "\n"), "\n")
+	var out []string
+	for _, input := range inputArray {
+		array := strings.Fields(input)
+		var outLine []string
+		for _, n := range number {
+			if n-1 < 0 && len(array) < n-1 {
+				continue
+			}
+			outLine = append(outLine, array[n-1])
+		}
+		out = append(out, strings.Join(outLine, " "))
+	}
+
+	return strings.Join(out, "\n")
 }
