@@ -1,10 +1,10 @@
 package main
 
 import (
+	"bufio"
 	"flag"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"log"
 	"os"
 	"strconv"
@@ -12,6 +12,7 @@ import (
 )
 
 type arrayFlags []int
+
 func (i *arrayFlags) String() string {
 	return ""
 }
@@ -27,8 +28,9 @@ func (i *arrayFlags) Set(value string) error {
 
 var (
 	numbers arrayFlags
-	help bool
+	help    bool
 )
+
 func init() {
 	flag.Var(&numbers, "n", "position of word")
 	flag.BoolVar(&help, "h", false, "help")
@@ -54,13 +56,13 @@ func run() error {
 		r = f
 	}
 
-	t, err := ioutil.ReadAll(r)
-	if err != nil {
+	scanner := bufio.NewScanner(r)
+	for scanner.Scan() {
+		fmt.Println(wd(scanner.Text(), numbers))
+	}
+	if err := scanner.Err(); err != nil {
 		return err
 	}
-
-	result := wd(string(t), numbers)
-	fmt.Println(result)
 	return nil
 }
 
@@ -76,7 +78,7 @@ func main() {
 	}
 }
 
-func helpMessage(){
+func helpMessage() {
 	fmt.Print(`For a space-delimited string, outputs the string at the specified location.
 usage: wd -n int
 example: 
@@ -85,20 +87,14 @@ example:
 `)
 }
 
-func wd(str string, number []int) string {
-	inputArray := strings.Split(strings.Trim(str, "\n"), "\n")
+func wd(line string, number []int) string {
 	var out []string
-	for _, input := range inputArray {
-		array := strings.Fields(input)
-		var outLine []string
-		for _, n := range number {
-			if n-1 < 0 && len(array) < n-1 {
-				continue
-			}
-			outLine = append(outLine, array[n-1])
+	array := strings.Fields(line)
+	for _, n := range number {
+		if n < 0 || len(array) < n {
+			continue
 		}
-		out = append(out, strings.Join(outLine, " "))
+		out = append(out, array[n-1])
 	}
-
-	return strings.Join(out, "\n")
+	return strings.Join(out, " ")
 }
