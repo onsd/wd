@@ -17,14 +17,21 @@ d
 ```
 
 ## how to install
-1. clone and install locally
+
+### use homebrew
+```console
+$ brew install onsd/tools/wd
+```
+
+### download binary from github releases
+
+check [releases](https://github.com/onsd/wd/releases) and download assets for your environment
+
+### clone and install locally
+
 **go required**
  ```console
 $ git clone git@github.com:onsd/wd.git
 $ cd wd
 $ go install
 ```
-
-2. download binary from github releases
-
-check [releases](https://github.com/onsd/wd/releases) and download assets for your environment
