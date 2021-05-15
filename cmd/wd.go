@@ -4,7 +4,7 @@ import (
 	"strings"
 )
 
-func wd(line string, number []int) string {
+func Wd(line string, number []int) string {
 	var out []string
 	array := strings.Fields(line)
 	for _, n := range number {

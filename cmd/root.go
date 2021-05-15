@@ -24,13 +24,15 @@ var (
 	help    bool
 )
 
-func init() {
+func checkFlag() {
 	flag.Var(&numbers, "n", "position of word")
 	flag.BoolVar(&help, "h", false, "help")
 	flag.Parse()
 }
 
 func Run() error {
+	checkFlag()
+
 	if help {
 		helpMessage()
 		return nil
@@ -59,7 +61,7 @@ func Run() error {
 
 	scanner := bufio.NewScanner(r)
 	for scanner.Scan() {
-		fmt.Println(wd(scanner.Text(), numbers))
+		fmt.Println(Wd(scanner.Text(), numbers))
 	}
 	if err := scanner.Err(); err != nil {
 		return err
