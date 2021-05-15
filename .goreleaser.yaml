@@ -1,0 +1,11 @@
+builds:
+- main: .
+  goos:
+  - linux
+  - darwin
+  - windows
+brews:
+- tap:
+    owner: progrhyme
+    name: homebrew-taps
+    token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
