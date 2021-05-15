@@ -18,13 +18,13 @@ d
 
 ## how to install
 1. clone and install locally
+**go required**
  ```console
 $ git clone git@github.com:onsd/wd.git
 $ cd wd
-# go required
 $ go install
 ```
 
 2. download binary from github releases
 
-TBA
+check [releases](https://github.com/onsd/wd/releases) and download assets for your environment
