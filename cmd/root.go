@@ -46,7 +46,7 @@ func Run() error {
 	var r io.Reader
 	switch filename {
 	case "", "-":
-		if terminal.IsTerminal(syscall.Stdin) {
+		if terminal.IsTerminal(int(syscall.Stdin)) {
 			return nil
 		}
 		r = os.Stdin
