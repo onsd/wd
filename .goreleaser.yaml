@@ -6,6 +6,6 @@ builds:
   - windows
 brews:
 - tap:
-    owner: progrhyme
-    name: homebrew-taps
+    owner: onsd
+    name: homebrew-wd
     token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
