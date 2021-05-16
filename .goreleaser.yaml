@@ -1,15 +1,13 @@
 builds:
 - main: .
   goos:
-    - linux
-    - darwin
-    - windows
-  goarch:
-    - '386'
-    - amd64
-    - arm64
+  - linux
+  - darwin
+  - windows
 brews:
 - tap:
     owner: onsd
-    name: homebrew-wd
+    name: homebrew-tools
     token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+  folder: Formula
+  homepage: https://github.com/onsd/wd
